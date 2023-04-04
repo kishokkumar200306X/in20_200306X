@@ -1,0 +1,150 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+#include <ctime>
+
+int stack_arr[20];
+int n=100;
+int top=-1;
+
+
+void push(int val) {
+   if(top==n-1){
+   cout<<"Stack Overflow"<<endl;
+   }
+   else {
+      top++;
+      stack_arr[top]=val;
+   }
+}
+
+void pop() {
+   if(top==-1){
+   cout<<"Stack Underflow"<<endl;
+   }
+   else {
+      cout<<"The popped element is "<< stack_arr[top] <<endl;
+      top--;
+   }
+}
+
+void display() {
+   if(top >= 0) {
+      cout<<"Stack elements are:";
+      for(int i=top; i>=0; i--)
+      cout<<stack_arr[i]<<" ";
+      cout<<endl;
+   } else
+   cout<<"Stack is empty";
+}
+
+
+struct Node {
+   int data;
+   struct Node *next;
+};
+
+struct Node* top_q = NULL;
+
+void push_q(int val) {
+   struct Node* newnode = (struct Node*) malloc(sizeof(struct Node));
+   newnode->data = val;
+   newnode->next = top_q;
+   top_q = newnode;
+}
+void pop_q() {
+   if(top_q==NULL)
+   cout<<"Stack Underflow"<<endl;
+   else {
+      cout<<"The popped element is "<< top_q->data <<endl;
+      top_q = top_q->next;
+   }
+}
+void display_q() {
+   struct Node* ptr;
+   if(top_q==NULL)
+   cout<<"stack is empty";
+   else {
+      ptr = top_q;
+      cout<<"Stack elements are: ";
+      while (ptr != NULL) {
+         cout<< ptr->data <<" ";
+         ptr = ptr->next;
+      }
+   }
+   cout<<endl;
+}
+
+int main() {
+    clock_t start;
+    clock_t end;
+    start = clock();
+    push(8);
+    end = clock();
+    double time_push_array1 = (end - start)/(double)CLOCKS_PER_SEC;
+    cout <<  "time_push_array(8) "<<time_push_array1 << endl;
+    push(10);
+    push(5);
+    push(11);;
+    push(15);
+    push(23);
+    push(6);
+    push(18);
+    push(20);
+    start = clock();
+    push(17);
+    end = clock();
+    double time_push_array2= (end - start)/(double)CLOCKS_PER_SEC;
+    cout <<  "time_push_array(17) "<<time_push_array2 << endl;
+    display();
+    for (int i = 0; i< 5; i++){
+         start = clock();
+        pop();
+        end = clock();
+    double time_pop_array = (end - start)/(double)CLOCKS_PER_SEC;
+    cout <<  "time_pop_array "<<"("<<i<< ")" <<time_pop_array<< endl;
+        display();
+    }
+    push(4);
+    push(30);
+    push(3);
+    push(1);
+    display();
+    cout<<"\n"<< endl;
+cout<< "linled list"<<endl;
+    start = clock();
+    push_q(8);
+    end = clock();
+    double time_push_list1 = (end - start)/(double)CLOCKS_PER_SEC;
+    cout <<  "time_push_list(8) "<<time_push_list1 << endl;
+    push_q(10);
+    push_q(5);
+    push_q(11);;
+    push_q(15);
+    push_q(23);
+    push_q(6);
+    push_q(18);
+    push_q(20);
+    start = clock();
+    push_q(17);
+    end = clock();
+    double time_push_list2 = (end - start)/(double)CLOCKS_PER_SEC;
+    cout <<  "time_push_list(17) "<<time_push_list2 << endl;
+    display_q();
+    for (int i = 0; i< 5; i++){
+        start = clock();
+        pop_q();
+        end = clock();
+    double time_pop_list = (end - start)/(double)CLOCKS_PER_SEC;
+    cout <<  "time_pop_list "<<"("<<i<<")"<<time_pop_list  << endl;
+        display_q();
+    }
+    push_q(4);
+    push_q(30);
+    push_q(3);
+    push_q(1);
+    display_q();
+    
+    
+}
+
